@@ -16,11 +16,14 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.6.1",
+    "@react-three/fiber": "^9.3.0",
     "dotenv": "^17.2.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.6.3"
+    "react-router": "^7.6.3",
+    "three": "^0.179.1"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
@@ -32,6 +35,7 @@
     "@types/node": "^24.0.12",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/three": "^0.178.1",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
     "@vitejs/plugin-react": "^4.6.0",
     "babel-loader": "^10.0.0",
