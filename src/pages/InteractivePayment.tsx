@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { OrbitControls, Text } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { useCallback, useMemo, useState } from "react";
+import { OrbitControls } from '@react-three/drei';
+import { useCallback, useState } from "react";
 import CardInputForm from "../domains/payments/cardInput/CardInputForm";
-import CreditCardMesh from "./components/CreditCardMesh";
-import ImagePlane from "../shared/components/assets/three/ImagePlane";
-import { CARD_INFO } from "../shared/components/three/CardPreview";
+import ThreeCardPreview from "./ThreeCardPreview";
+
+import { useFunnel } from "../shared/funnel/useFunnel"; // 퍼널 훅 import
 
 export interface CardInfo {
   cardNumbers: string[];
@@ -43,64 +43,37 @@ function InteractivePayment() {
     []
   );
 
-  const { cardType } = useMemo(() => {
-      const firstNumber = cardInfo.cardNumbers[0] ?? "";
-  
-      if (firstNumber.startsWith(CARD_INFO.VISA_START_NUMBER.toString())) {
-        return { cardType: "Visa" };
-      }
-  
-      const isMaster = CARD_INFO.MASTER_START_NUMBERS.some((startNumber) =>
-        firstNumber.startsWith(startNumber.toString())
-      );
-  
-      return {
-        cardType: isMaster ? "Mastercard" : "",
-      };
-    }, [cardInfo.cardNumbers]);
+  // 퍼널 훅 사용!
+  const { startFunnel, endFunnel } = useFunnel();
+
+  // 예시: 카드 등록 흐름 시작!
+  const handleStartCardFunnel = () => {
+    startFunnel("/add-card/input"); // 카드 입력 퍼널 진입(경로는 실제 라우터에 맞게)
+  };
+
+  // 예시: 카드 등록 성공 후 퍼널 흐름 종료
+  const handleEndCardFunnel = () => {
+    endFunnel();
+  };
 
   return (
     <S.Container>
       <S.Wrapper>
+        <button type="button" onClick={handleStartCardFunnel}>
+          카드등록 퍼널 시작
+        </button>
         <Canvas
             style={{ width: '50vw', height: '440px' }}
             camera={{ position: [0, 0, 140], fov: 50 }}>
-              <group rotation={[0, 0, Math.PI / 10]}>
-                <CreditCardMesh cardInfo={cardInfo} />
-                <ImagePlane url={cardType ? `/${cardType}.png` : '/Visa.png'} width={12} height={8} position={[32, 15, 2.1]} />
-                  <Text
-                    position={[-36, -8, 2.1]}
-                    fontSize={4}
-                    color="black"
-                    anchorX="left"
-                    anchorY="middle"
-                  >
-                    {cardInfo.cardNumbers.join(' ')}
-                  </Text>
-                  <Text
-                    position={[-36, -14, 2.1]}
-                    fontSize={4}
-                    color="black"
-                    anchorX="left"
-                    anchorY="middle"
-                  >
-                    {cardInfo.expirationDate.join('/')}
-                  </Text>
-              </group>
-                <OrbitControls />
+            <ThreeCardPreview cardInfo={cardInfo} />
+            <OrbitControls />
         </Canvas>
-        {/* <CardPreview cardInfo={cardInfo} /> */}
         <CardInputForm
           cardInfo={cardInfo}
-          handleCardNumbersChange={(value) =>
-            handleInputChange("cardNumbers", value)
-          }
-          handleExpirationDateChange={(value) =>
-            handleInputChange("expirationDate", value)
-          }
-          handleBrandNameChange={(value) =>
-            handleInputChange("brandName", value)
-          }
+          handleCardNumbersChange={(value) => handleInputChange("cardNumbers", value)}
+          handleExpirationDateChange={(value) => handleInputChange("expirationDate", value)}
+          handleBrandNameChange={(value) => handleInputChange("brandName", value)}
+          onSuccess={() => handleEndCardFunnel()}  // 예시: 마지막 입력 성공 시 퍼널 종료
         />
       </S.Wrapper>
     </S.Container>

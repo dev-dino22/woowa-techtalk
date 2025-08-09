@@ -13,6 +13,7 @@ interface CardInputFormProps {
   handleCardNumbersChange: (cardNumbers: string[]) => void;
   handleExpirationDateChange: (expirationDate: string[]) => void;
   handleBrandNameChange: (brandName: TCardBrand | "") => void;
+  onSuccess?: () => void;
 }
 
 function CardInputForm({
@@ -20,8 +21,9 @@ function CardInputForm({
   handleCardNumbersChange,
   handleExpirationDateChange,
   handleBrandNameChange,
+   onSuccess,
 }: CardInputFormProps) {
-  const { cardNumbers, brandName } = cardInfo;
+  const { cardNumbers, brandName  } = cardInfo;
   const {
     activatedInputs,
     isVisibleSubmitButton,
@@ -32,7 +34,8 @@ function CardInputForm({
   const navigate = useNavigate();
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+     e.preventDefault();
+    onSuccess?.(); 
     navigate("/add-card/success", {
       state: {
         firstCardNumber: cardNumbers[0],
