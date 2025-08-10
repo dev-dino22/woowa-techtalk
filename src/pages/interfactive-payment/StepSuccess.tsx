@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import Button from "../../shared/components/actions/button/Button";
+import Button from "../../shared/components/actions/Button";
 import styled from "@emotion/styled";
 
 export default function StepSuccess() {

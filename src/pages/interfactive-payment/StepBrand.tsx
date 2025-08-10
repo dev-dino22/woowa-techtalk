@@ -1,9 +1,9 @@
 import { useNavigate, useOutletContext } from "react-router";
 import { generateRouterPath } from "../../routes/routePath";
-import Button from "../../shared/components/actions/button/Button";
+import Button from "../../shared/components/actions/Button";
 import SelectBox from "../../shared/components/actions/selectForm/SelectBox";
-import type { TCardBrand } from "../InteractivePayment";
-import type { AddCardContextType } from "./AddCardLayout";
+import type { TCardBrand } from "./Main";
+import type { AddCardContextType } from "./Main";
 import styled from "@emotion/styled";
 import SlideUpText from "../../shared/components/animations/SlideUpText";
 import FadeIn from "../../shared/components/animations/FadeIn";

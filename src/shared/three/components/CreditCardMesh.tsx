@@ -1,8 +1,9 @@
-import { useRoundedRectGeometry } from '../../shared/three/hooks/useRoundedRectGeometry';
+import { useRoundedRectGeometry } from '../hooks/useRoundedRectGeometry';
+import type { CARD_BACKGROUND_COLOR } from '../../../pages/interfactive-payment/Main';
 import ColorPlane from './ColorPlane';
 
 type Props = {
-  cardColor: string;
+  cardColor: keyof typeof CARD_BACKGROUND_COLOR;
 }
 function CreditCardMesh({ cardColor }: Props) {
 

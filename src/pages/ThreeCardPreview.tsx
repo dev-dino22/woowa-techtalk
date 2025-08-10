@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Group } from "three";
 import { Text } from "@react-three/drei";
-import ImagePlane from "../shared/components/assets/three/ImagePlane";
-import CreditCardMesh from "./components/CreditCardMesh";
-import { CARD_BACKGROUND_COLOR } from "./InteractivePayment";
-import type { CardInfo } from "./interfactive-payment/AddCardLayout";
+import ImagePlane from "../shared/three/components/ImagePlane";
+import CreditCardMesh from "../shared/three/components/CreditCardMesh";
+import { CARD_BACKGROUND_COLOR } from "./interfactive-payment/Main";
+import type { CardInfo } from "./interfactive-payment/Main";
 
 type Props = {
   cardInfo: CardInfo;

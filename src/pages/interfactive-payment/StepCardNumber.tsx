@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
 import { useNavigate, useOutletContext } from "react-router";
 import { generateRouterPath } from "../../routes/routePath";
-import Button from "../../shared/components/actions/button/Button";
+import Button from "../../shared/components/actions/Button";
 import FloatInput from "../../shared/components/actions/FloatInput";
-import { CARD_INFO } from "../../shared/components/three/CardPreview";
-import type { AddCardContextType } from "./AddCardLayout";
+import { CARD_INFO, type AddCardContextType } from "./Main";
 import SlideUpText from "../../shared/components/animations/SlideUpText";
 import FadeIn from "../../shared/components/animations/FadeIn";
 

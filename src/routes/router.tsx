@@ -1,7 +1,6 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
-import DefaultPayment from '../pages/DefaultPayment';
-import AddCardLayout from '../pages/interfactive-payment/AddCardLayout';
+import AddCardLayout from '../pages/interfactive-payment/Main';
 import StepBrand from '../pages/interfactive-payment/StepBrand';
 import StepCardNumber from '../pages/interfactive-payment/StepCardNumber';
 import StepCvc from '../pages/interfactive-payment/StepCvc';
@@ -31,7 +30,6 @@ const routes = createBrowserRouter([
     Component: Wrapper,
     children: [
       { path: ROUTE_PATH.HOME, Component: MainToPayment },
-      { path: ROUTE_PATH.DEFAULT_PAYMENT, Component: DefaultPayment },
       { path: ROUTE_PATH.INTERACTIVE_PAYMENT.BASE, Component: AddCardLayout, children: [
           { index: true, element: <StepCardNumber /> },
           { path: ROUTE_PATH.INTERACTIVE_PAYMENT.BRAND, element: <StepBrand /> },

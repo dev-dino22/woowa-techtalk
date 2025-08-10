@@ -7,7 +7,7 @@ import CardPasswordInput from "./cardPasswordInput/CardPasswordInput";
 import { useNavigate } from "react-router";
 import { CARD_BACKGROUND_COLOR, type CardInfo, type TCardBrand } from "../../../pages/InteractivePayment";
 import { useCardInputForm } from "./useForm";
-import Button from "../../../shared/components/actions/button/Button";
+import Button from "../../../shared/components/actions/Button";
 interface CardInputFormProps {
   cardInfo: CardInfo;
   handleCardNumbersChange: (cardNumbers: string[]) => void;

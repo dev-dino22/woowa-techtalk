@@ -1,5 +1,5 @@
 
-import Input from "../../../../shared/components/actions/inputField/input/Input";
+import Input from "../../../../shared/components/actions/input/Input";
 import InputField from "../../../../shared/components/actions/inputField/InputField";
 import { CARD_INFO } from "../../../../shared/components/three/CardPreview";
 import { useCardNumberInput } from "./useNumberInput";
