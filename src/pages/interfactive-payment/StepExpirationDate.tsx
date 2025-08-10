@@ -1,10 +1,11 @@
+import styled from "@emotion/styled";
 import { useNavigate, useOutletContext } from "react-router";
 import { generateRouterPath } from "../../routes/routePath";
 import Button from "../../shared/components/actions/button/Button";
-import Input from "../../shared/components/actions/Input";
-import InputField from "../../shared/components/actions/inputField/InputField";
+import FloatInput from "../../shared/components/actions/FloatInput";
+import FadeIn from "../../shared/components/animations/FadeIn";
+import SlideUpText from "../../shared/components/animations/SlideUpText";
 import type { AddCardContextType } from "./AddCardLayout";
-import styled from "@emotion/styled";
 
 function StepExpirationDate() {
   const navigate = useNavigate();
@@ -12,47 +13,68 @@ function StepExpirationDate() {
 
 
   return (
-    <div>
-    <InputField
-      title="카드 유효기간을 입력해 주세요."
-      description="월/년도(MMYY)를 순서대로 입력해 주세요."
-      label="유효기간"
-    >
-      {["MONTH", "YEAR"].map((field, i) => {
-        const name = field.toLowerCase() as "month" | "year";
-
-        return (
-          <Input
-            key={name}
-            type="tel"
-            name={name}
-            value={expiration[name]}
-            placeholder={field === "MONTH" ? "MM" : "YY"}
-            onChange={(e) => {
-              if (field === "MONTH") {
-                handleExpirationMonthChange(e.target.value);
-              } else {
-                handleExpirationYearChange(e.target.value);
-              }
-            }}
-            maxLength={2}
-            autoFocus={i === 0}
-          />
-        );
-      })}
-    </InputField>
-    <S.Footer>
-      <Button onClick={() => navigate((generateRouterPath.interactivePaymentCVC()))}>
-        다음
-      </Button>
-      </S.Footer>
-    </div>
+    <S.Container>
+        <SlideUpText>
+                <S.Title>카드 유효기간을 입력해 주세요</S.Title>
+                <S.Description>월/년도(MMYY)를 순서대로 입력해 주세요.</S.Description>
+        </SlideUpText>
+        <FadeIn delay={0.5}>
+            <S.InputField>
+                {["MONTH", "YEAR"].map((field, i) => {
+                    const name = field.toLowerCase() as "month" | "year";
+                    return (
+                    <FloatInput
+                        label={field === "MONTH" ? "월(MM)" : "년도(YY)"}
+                        key={name}
+                        type="tel"
+                        name={name}
+                        value={expiration[name]}
+                        onChange={(e) => {
+                        if (field === "MONTH") {
+                            handleExpirationMonthChange(e.target.value);
+                        } else {
+                            handleExpirationYearChange(e.target.value);
+                        }
+                        }}
+                        maxLength={2}
+                    />
+                    );
+                })}
+            </S.InputField>
+        </FadeIn>
+        <S.Footer>
+            <Button onClick={() => navigate((generateRouterPath.interactivePaymentCVC()))}>
+                다음
+            </Button>
+        </S.Footer>
+    </S.Container>
   );
 }
 
 export default StepExpirationDate;
 
 const S = {
+    Container: styled.div`
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    `,
+    Title: styled.h2`
+        font: ${({theme}) => theme.FONTS.heading.medium};
+    `,
+    Description: styled.p`
+        margin-bottom: 48px;
+
+        color: ${({theme}) => theme.PALETTE.gray[50]};
+
+        font: ${({theme}) => theme.FONTS.body.small};
+    `,
+    InputField: styled.div`
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    `,
     Footer: styled.footer`
         width: 100%;
         max-width: 640px;

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 
 interface SelectBoxProps<T> {
-  title: string;
+  title?: string;
   description?: string;
   placeholder: string;
   options: T[];
@@ -46,7 +46,7 @@ const SelectBox = <T extends {}>({
   return (
     <S.Container>
       <S.TitleBox>
-        <S.Title className="tx-xl">{title}</S.Title>
+        {title && <S.Title className="tx-xl">{title}</S.Title>}
         {description && <S.Description className="tx-md">{description}</S.Description>}
       </S.TitleBox>
 
@@ -66,7 +66,6 @@ const SelectBox = <T extends {}>({
           isOpened={selectState.isOpened}
         />
       </S.Selector>
-
       {selectState.isOpened && (
         <SelectOption options={options} setSelectState={setSelectState} />
       )}
@@ -84,8 +83,6 @@ const S = {
     flex-direction: column;
     gap: 4px;
     position: relative;
-
-    margin-bottom: 10px;
   `,
   TitleBox: styled.div`
     display: flex;
@@ -101,7 +98,6 @@ const S = {
     display: flex;
     justify-content: space-between;
 
-    margin-top: 16px;
     padding: 12px 8px;
     border: 1px solid ${({theme}) => theme.PALETTE.gray[60]};
 

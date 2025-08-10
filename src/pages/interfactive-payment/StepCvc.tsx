@@ -1,11 +1,11 @@
+import styled from "@emotion/styled";
 import { useNavigate, useOutletContext } from "react-router";
-import Input from "../../shared/components/actions/Input";
-import InputField from "../../shared/components/actions/inputField/InputField";
+import { generateRouterPath } from "../../routes/routePath";
+import Button from "../../shared/components/actions/button/Button";
+import FloatInput from "../../shared/components/actions/FloatInput";
+import SlideUpText from "../../shared/components/animations/SlideUpText";
 import { CARD_INFO } from "../../shared/components/three/CardPreview";
 import type { AddCardContextType } from "./AddCardLayout";
-import Button from "../../shared/components/actions/button/Button";
-import { generateRouterPath } from "../../routes/routePath";
-import styled from "@emotion/styled";
 
 export default function StepCvc() {
   const navigate = useNavigate();
@@ -13,30 +13,42 @@ export default function StepCvc() {
 
 
   return (
-    <>
-        <InputField
-            title="CVC 번호를 입력해 주세요."
+    <S.Container>
+        <SlideUpText>
+            <S.Title>CVC 번호를 입력해 주세요</S.Title>
+        </SlideUpText>
+        <FloatInput
             label="CVC"
-            >
-            <Input
-            autoFocus
             type="tel"
             name="cardCVC"
-            placeholder="123"
             maxLength={CARD_INFO.CVC_LENGTH}
             onChange={(e) => handleCvcChange(e.target.value)}
-            />
-        </InputField>
+        />
         <S.Footer>
             <Button onClick={() => navigate(generateRouterPath.interactivePaymentSuccess())}>
                 다음
             </Button>
         </S.Footer>
-    </>
+    </S.Container>
   );
 }
 
 const S = {
+    Container: styled.div`
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    `,
+    Title: styled.h2`
+        font: ${({theme}) => theme.FONTS.heading.medium};
+    `,
+    Description: styled.p`
+        margin-bottom: 48px;
+
+        color: ${({theme}) => theme.PALETTE.gray[50]};
+
+        font: ${({theme}) => theme.FONTS.body.small};
+    `,
     Footer: styled.footer`
         width: 100%;
         max-width: 640px;

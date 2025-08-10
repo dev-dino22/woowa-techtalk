@@ -1,10 +1,10 @@
 import { Text } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
-import ImagePlane from "../shared/components/assets/three/ImagePlane";
-import CreditCardMesh from "./components/CreditCardMesh";
-import { CARD_BACKGROUND_COLOR } from "./InteractivePayment";
-import type { CardInfo } from "./interfactive-payment/AddCardLayout";
+import ImagePlane from "../../shared/components/assets/three/ImagePlane";
+import CreditCardMesh from "../components/CreditCardMesh";
+import { CARD_BACKGROUND_COLOR } from "../InteractivePayment";
+import type { CardInfo } from "../interfactive-payment/AddCardLayout";
 
 type Props = {
     cardInfo : CardInfo

@@ -22,7 +22,8 @@ function MainToPayment() {
           <S.Description>카드를 등록하고 다양한 혜택을 받아보세요.</S.Description>
         </S.MessageContainer>
 
-        <S.RegisterButton onClick={() => navigate(ROUTE_PATH.DEFAULT_PAYMENT)}>카드 등록하러 가기</S.RegisterButton>
+        <S.LinkButton href='https://dev-dino22.github.io/react-payments/add-card' target="_blank"
+              rel="noopener noreferrer" >기존의 카드 등록하러 가기</S.LinkButton>
         <S.RegisterButton onClick={() => navigate(ROUTE_PATH.INTERACTIVE_PAYMENT.BASE)}>인터랙티브 카드 등록하러 가기</S.RegisterButton>
       </S.Content>
     </S.Container>
@@ -118,6 +119,28 @@ const S = {
 
     font-size: 16px;
     font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #444;
+    }
+  `,
+  LinkButton: styled.a`
+    width: 100%;
+
+    margin-top: 20px;
+    padding: 16px;
+    border: none;
+
+    background-color: #333;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    text-align: center;
     border-radius: 6px;
     cursor: pointer;
 

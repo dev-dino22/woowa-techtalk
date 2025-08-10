@@ -40,8 +40,8 @@ export default SelectOption;
 const S = {
   Container: styled.ul`
     width: 100%;
-     position: absolute;
-    top: 110px;
+    position: absolute;
+    top: 60px;
 
     border: 1px solid ${({theme}) => theme.PALETTE.gray[60]};
     box-sizing: border-box;
