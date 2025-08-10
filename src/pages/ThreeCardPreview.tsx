@@ -1,70 +1,105 @@
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { Group } from "three";
 import { Text } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
 import ImagePlane from "../shared/components/assets/three/ImagePlane";
 import CreditCardMesh from "./components/CreditCardMesh";
 import { CARD_BACKGROUND_COLOR } from "./InteractivePayment";
 import type { CardInfo } from "./interfactive-payment/AddCardLayout";
 
 type Props = {
-    cardInfo : CardInfo
-}
+  cardInfo: CardInfo;
+  finished: boolean;
+};
 
-function ThreeCardPreview({ cardInfo }: Props) {
-  const groupRef = useRef(null);
-  const [targetRotation, setTargetRotation] = useState(Math.PI);
-  const [rotationY, setRotationY] = useState(Math.PI);
-  const [isAnimating, setIsAnimating] = useState(false);
+function ThreeCardPreview({ cardInfo, finished }: Props) {
+  const groupRef = useRef<Group>(null);
+  const animationTimeline = useRef<GSAPTimeline | null>(null);
 
+  // 이전 카드 정보 빈값 여부 상태 추적용 ref
   const prevCardNumbersEmpty = useRef(true);
-  const prevExpirationDateEmpty = useRef(true);
-  const prevBrandNameEmpty = useRef(true);
+  const prevExpirationEmpty = useRef(true);
+  const prevBrandEmpty = useRef(true);
 
-
- useFrame(() => {
-    if (!isAnimating || !groupRef.current) return;
-
-    const diff = targetRotation - rotationY;
-    if (Math.abs(diff) > 0.01) {
-      const step = diff * 0.1;
-      const newRotation = rotationY + step;
-      groupRef.current.rotation.y = newRotation;
-      setRotationY(newRotation);
-    } else {
-      groupRef.current.rotation.y = targetRotation;
-      setRotationY(targetRotation);
-      setIsAnimating(false);
-    }
-  });
-
+  // 등장 애니메이션 (마운트 시)
   useEffect(() => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = Math.PI;
-    }
+    if (!groupRef.current) return;
+
+    // 초기 위치와 회전 세팅
+    const group = groupRef.current;
+    group.position.y = 100;
+    group.rotation.y = 0;
+
+    gsap.to(group.position, {
+      y: 0,
+      duration: 1,
+      ease: "power3.out",
+    });
+    gsap.to(group.rotation, {
+      y: Math.PI * 3,
+      duration: 1,
+      ease: "power3.out",
+    });
   }, []);
 
-  const startFlipAnimation = () => {
-    if (isAnimating) return;
-    setTargetRotation(prev => prev + Math.PI);
-    setIsAnimating(true);
-  };
-
   useEffect(() => {
+    if (!groupRef.current) return;
+
+    if (animationTimeline.current) {
+      animationTimeline.current.kill();
+      animationTimeline.current = null;
+    }
+
+    if (finished) {
+      const group = groupRef.current;
+      const tl = gsap.timeline();
+
+      tl.to(group.rotation, {
+        y: group.rotation.y + Math.PI * 2,
+        duration: 0.8,
+        ease: "power2.out",
+      });
+      tl.to(
+        group.rotation,
+        {
+          y: "+=6.28319",
+          duration: 10,
+          repeat: -1,
+          ease: "linear",
+        },
+        ">"
+      );
+
+      animationTimeline.current = tl;
+    } else {
+      animationTimeline.current = null;
+    }
+  }, [finished]);
+
+  // 카드 정보 변경 시 플립 애니메이션 처리
+  useEffect(() => {
+    if (!groupRef.current) return;
+
     const isCardNumbersEmpty = cardInfo.cardNumbers.length === 0;
-    const isExpirationDateEmpty = cardInfo.expiration.month === "" && cardInfo.expiration.year === "";
-    const isBrandNameEmpty = cardInfo.brandName === "";
+    const isExpirationEmpty = cardInfo.expiration.month === "" && cardInfo.expiration.year === "";
+    const isBrandEmpty = cardInfo.brandName === "";
 
     if (
       (prevCardNumbersEmpty.current && !isCardNumbersEmpty) ||
-      (prevExpirationDateEmpty.current && !isExpirationDateEmpty) ||
-      (prevBrandNameEmpty.current && !isBrandNameEmpty)
+      (prevExpirationEmpty.current && !isExpirationEmpty) ||
+      (prevBrandEmpty.current && !isBrandEmpty)
     ) {
-      startFlipAnimation();
+      const group = groupRef.current;
+      gsap.to(group.rotation, {
+        y: group.rotation.y + Math.PI,
+        duration: 0.4,
+        ease: "power2.easeInOut",
+      });
     }
 
     prevCardNumbersEmpty.current = isCardNumbersEmpty;
-    prevExpirationDateEmpty.current = isExpirationDateEmpty;
-    prevBrandNameEmpty.current = isBrandNameEmpty;
+    prevExpirationEmpty.current = isExpirationEmpty;
+    prevBrandEmpty.current = isBrandEmpty;
   }, [cardInfo]);
 
   return (

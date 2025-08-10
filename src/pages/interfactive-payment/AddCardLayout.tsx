@@ -43,7 +43,7 @@ function AddCardLayout() {
       <Header />
       <ProgressBar totalSteps={5} currentStep={progress} />
       <Canvas style={{ width: "50vw", height: 440 }} camera={{ position: [0, 0, 140], fov: 50 }}>
-        <ThreeCardPreview cardInfo={cardInfo} />
+        <ThreeCardPreview cardInfo={cardInfo} finished={progress === 5} />
         <OrbitControls />
       </Canvas>
       <div style={{ marginTop: 40, width: "100%", maxWidth: '640px' }}>
