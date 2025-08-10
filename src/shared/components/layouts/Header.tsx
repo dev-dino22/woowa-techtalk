@@ -1,10 +1,7 @@
-import Hamburger from '@components/assets/icons/Hamburger';
-import Logo from '@components/assets/identity/Logo';
-
-import { ROUTE_PATH } from '@routes/routePath';
-
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router';
+import Arrow from '../assets/icons/Arrow';
+import { ROUTE_PATH } from '../../../routes/routePath';
 
 export const HEADER_HEIGHT = '72px';
 
@@ -13,9 +10,8 @@ function Header() {
   return (
     <S.Container>
       <S.LogoWrapper onClick={() => navigate(ROUTE_PATH.HOME)}>
-        <Logo />
+        <Arrow size='lg' direction='left' color='#acacac' />
       </S.LogoWrapper>
-      <Hamburger size="lg" />
     </S.Container>
   );
 }
@@ -34,7 +30,6 @@ const S = {
     padding: ${({ theme }) => theme.PADDING.p5};
 
     background-color: ${({ theme }) => theme.PALETTE.gray[0]};
-    border-bottom: solid 1px ${({ theme }) => theme.PALETTE.gray[20]};
   `,
 
   LogoWrapper: styled.button`

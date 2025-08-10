@@ -1,4 +1,4 @@
-import styles from "./Button.module.css";
+import styled from "@emotion/styled";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClickHandler?: () => void;
@@ -14,15 +14,45 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   return (
-    <button
+    <S.Button
       onClick={onClickHandler}
       style={{ backgroundColor }}
-      className={`${styles.button} tx-lg`}
       {...props}
     >
       {children}
-    </button>
+    </S.Button>
   );
 };
 
 export default Button;
+
+const S = {
+  Button: styled.button<ButtonProps>`
+    width: 100%;
+    height: 48px;
+
+    background-color: ${({ backgroundColor, theme }) =>
+      backgroundColor || theme.PALETTE.gray[80]};
+
+    color: ${({ theme }) => theme.PALETTE.gray[0]};
+    font-size: 16px;
+    font-weight: 600;
+
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    border-radius: 8px;
+    line-height: 24px;
+
+    &:hover {
+      background-color: ${({ backgroundColor, theme }) =>
+      backgroundColor || theme.PALETTE.gray[90]};
+      transform: scale(1.015);
+
+    }
+
+    &:active {
+      background-color: ${({ backgroundColor, theme }) =>
+      backgroundColor || theme.PALETTE.gray[100]};
+      transform: scale(0.98);
+    }
+  `,
+};

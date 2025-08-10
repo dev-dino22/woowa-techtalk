@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
-import { ComponentProps } from 'react';
 
 type Props = {
   label?: string;
-} & ComponentProps<'input'>;
+} & React.ComponentProps<'input'>;
 
 function Input({ label, ...props }: Props) {
   return (

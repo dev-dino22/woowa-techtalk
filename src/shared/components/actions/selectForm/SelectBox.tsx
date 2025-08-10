@@ -1,7 +1,7 @@
 import SelectOption from "./SelectOption";
-import styles from "./SelectBox.module.css";
 import ArrowSvg from "./assets/ArrowSvg";
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 
 interface SelectBoxProps<T> {
   title: string;
@@ -44,19 +44,16 @@ const SelectBox = <T extends {}>({
   }, [selectState.selectedOption]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.titleBox}>
-        <label className={`${styles.title} tx-xl`}>{title}</label>
-        {description && (
-          <p className={`${styles.description} tx-md`}>{description}</p>
-        )}
-      </div>
-      <button
+    <S.Container>
+      <S.TitleBox>
+        <S.Title className="tx-xl">{title}</S.Title>
+        {description && <S.Description className="tx-md">{description}</S.Description>}
+      </S.TitleBox>
+
+      <S.Selector
         type="button"
         onClick={onClickHandler}
-        className={`${styles.selector} ${
-          selectState.selectedOption === null ? "" : styles.selected
-        }`}
+        className={selectState.selectedOption === null ? "" : "selected"}
         autoFocus={autoFocus}
       >
         <span>
@@ -68,12 +65,54 @@ const SelectBox = <T extends {}>({
           color={selectState.selectedOption === null ? "#acacac" : "black"}
           isOpened={selectState.isOpened}
         />
-      </button>
+      </S.Selector>
+
       {selectState.isOpened && (
         <SelectOption options={options} setSelectState={setSelectState} />
       )}
-    </div>
+    </S.Container>
   );
 };
 
 export default SelectBox;
+
+const S = {
+  Container: styled.div`
+    width: 100%;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+
+    margin-bottom: 10px;
+  `,
+  TitleBox: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  `,
+  Title: styled.label``,
+  Description: styled.p`
+    color: ${({theme}) => theme.PALETTE.gray[40]};
+  `,
+  Selector: styled.button`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 16px;
+    padding: 12px 8px;
+    border: 1px solid ${({theme}) => theme.PALETTE.gray[60]};
+
+    background: none;
+
+    color: ${({theme}) => theme.PALETTE.gray[40]};
+    border-radius: 4px;
+    cursor: pointer;
+
+    &.selected {
+      color: ${({theme}) => theme.PALETTE.gray[95]};
+    }
+  `,
+};

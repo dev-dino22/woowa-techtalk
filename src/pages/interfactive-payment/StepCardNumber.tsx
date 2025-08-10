@@ -1,23 +1,63 @@
+import styled from "@emotion/styled";
 import { useNavigate, useOutletContext } from "react-router";
-import Button from "../../shared/components/actions/button/Button";
-import CardNumberInput from "../../domains/payments/cardInput/cardNumberInput/CardNumberInput";
 import { generateRouterPath } from "../../routes/routePath";
+import Button from "../../shared/components/actions/button/Button";
+import FloatInput from "../../shared/components/actions/FloatInput";
+import { CARD_INFO } from "../../shared/components/three/CardPreview";
+import type { AddCardContextType } from "./AddCardLayout";
+import SlideUpText from "../../shared/components/animations/SlideUpText";
+import FadeIn from "../../shared/components/animations/FadeIn";
 
-export default function StepCardNumber() {
-  const navigate = useNavigate();
-  const { cardInfo, setCardInfo } = useOutletContext();
+function StepCardNumber() {
+    const { cardNumber, handleCardNumbersChange } = useOutletContext<AddCardContextType>();
+    const navigate = useNavigate();
+    
+    return (
+        <S.Container>
+            <SlideUpText>
+                <S.Title>결제할 카드 번호를 입력해주세요</S.Title>
+                <S.Description>본인 명의의 카드만 가능합니다.</S.Description>
+            </SlideUpText>
+            <FadeIn delay={0.5}>
+                <FloatInput
+                    label="카드 번호"
+                    type="tel"
+                    value={cardNumber}
+                    maxLength={CARD_INFO.NUMBER_LENGTH_PART}
+                    onChange={(e) => handleCardNumbersChange(e.target.value)}
+                />
+            </FadeIn>
+            <S.Footer>
+                <Button onClick={() => navigate(generateRouterPath.interactivePaymentBrand())}>
+                    다음
+                </Button>
+            </S.Footer>
+        </S.Container>
+    );
+}
 
-  const canNext = cardInfo.cardNumbers.length > 0;
+export default StepCardNumber;
 
-  return (
-    <div>
-      <CardNumberInput
-        value={cardInfo.cardNumbers}
-        handleCardNumbersChange={(v) => setCardInfo(prev => ({ ...prev, cardNumbers: v }))}
-      />
-      <Button onClick={() => canNext && navigate(generateRouterPath.interactivePaymentBrand())} disabled={!canNext}>
-        다음
-      </Button>
-    </div>
-  );
+const S = {
+    Container: styled.div`
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    `,
+    Title: styled.h2`
+        font: ${({theme}) => theme.FONTS.heading.medium};
+    `,
+    Description: styled.p`
+        margin-bottom: 48px;
+
+        color: ${({theme}) => theme.PALETTE.gray[50]};
+
+        font: ${({theme}) => theme.FONTS.body.small};
+    `,
+    Footer: styled.footer`
+        width: 100%;
+        max-width: 640px;
+        position: fixed;
+        bottom: 48px;
+    `,
 }

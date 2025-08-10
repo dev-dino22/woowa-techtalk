@@ -1,4 +1,4 @@
-import styles from "./SelectOption.module.css";
+import styled from "@emotion/styled";
 
 interface SelectState<T> {
   selectedOption: T | null;
@@ -22,18 +22,40 @@ const SelectOption = <T extends {}>({
   }
 
   return (
-    <ul className={styles.container}>
+    <S.Container>
       {options.map((option, index) => (
-        <li
+        <S.Item
           key={index}
           onClick={() => onClickHandler(option)}
-          className={`${styles.item} tx-md`}
         >
           {String(option)}
-        </li>
+        </S.Item>
       ))}
-    </ul>
+    </S.Container>
   );
 };
 
 export default SelectOption;
+
+const S = {
+  Container: styled.ul`
+    width: 100%;
+     position: absolute;
+    top: 110px;
+
+    border: 1px solid ${({theme}) => theme.PALETTE.gray[60]};
+    box-sizing: border-box;
+
+    background-color: ${({theme}) => theme.PALETTE.gray[0]};
+
+    color: ${({theme}) => theme.PALETTE.gray[40]};
+    border-radius: 4px;
+  `,
+  Item: styled.li`
+    padding: 8px 10px;
+
+    &:hover {
+      background-color: var(--light-grey);
+    }
+  `,
+};

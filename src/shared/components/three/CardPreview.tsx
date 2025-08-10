@@ -8,7 +8,7 @@ interface CardPreviewProps {
 
 export const CARD_INFO: ICardInfo = {
   NUMBER_LENGTH: 16,
-  NUMBER_LENGTH_PART: 4,
+  NUMBER_LENGTH_PART: 16,
   VISA_START_NUMBER: 4,
   MASTER_START_NUMBERS: [51, 52, 53, 54, 55],
   CVC_LENGTH: 3,
