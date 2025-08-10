@@ -42,9 +42,9 @@ function AddCardLayout() {
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Header />
       <ProgressBar totalSteps={5} currentStep={progress} />
-      <Canvas style={{ width: "50vw", height: 440 }} camera={{ position: [0, 0, 140], fov: 50 }}>
+      <Canvas style={{ width: "50vw", height: 400 }} camera={{ position: [0, 0, 140], fov: 50 }}>
         <ThreeCardPreview cardInfo={cardInfo} finished={progress === 5} />
-        <OrbitControls />
+        <OrbitControls enableZoom={false} />
       </Canvas>
       <div style={{ marginTop: 40, width: "100%", maxWidth: '640px' }}>
         <Outlet context={{ cardInfo, cardNumber, cardBrand, expiration, cvc, handleCardNumbersChange, handleExpirationMonthChange, handleExpirationYearChange, handleBrandNameChange, handleCvcChange, handleProgressPlus }} />

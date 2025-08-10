@@ -12,6 +12,7 @@ function FloatInput({ label, ...props }: Props) {
         id="input"
         type="text"
         placeholder=""
+        autoComplete="off"
         {...props}
       />
       <S.FloatingLabel htmlFor="input">{label}</S.FloatingLabel>

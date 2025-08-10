@@ -8,6 +8,12 @@ import type { AddCardContextType } from "./AddCardLayout";
 import SlideUpText from "../../shared/components/animations/SlideUpText";
 import FadeIn from "../../shared/components/animations/FadeIn";
 
+function formatCardNumber(input: string) {
+  return input.replace(/\D/g, '')
+    .replace(/(.{4})/g, '$1 ')
+    .trim();
+}
+
 function StepCardNumber() {
     const { cardNumber, handleCardNumbersChange, handleProgressPlus } = useOutletContext<AddCardContextType>();
     const navigate = useNavigate();
@@ -16,6 +22,14 @@ function StepCardNumber() {
         navigate(generateRouterPath.interactivePaymentBrand());
         handleProgressPlus();
     }
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const raw = e.target.value.replace(/\s/g, '');
+        if (raw.length > CARD_INFO.NUMBER_LENGTH_PART) return;
+        handleCardNumbersChange(raw);
+    };
+
+  const formattedValue = formatCardNumber(cardNumber);
 
     return (
         <S.Container>
@@ -27,9 +41,8 @@ function StepCardNumber() {
                 <FloatInput
                     label="카드 번호"
                     type="tel"
-                    value={cardNumber}
-                    maxLength={CARD_INFO.NUMBER_LENGTH_PART}
-                    onChange={(e) => handleCardNumbersChange(e.target.value)}
+                    value={formattedValue}
+                    onChange={handleInputChange}
                 />
             </FadeIn>
             <S.Footer>

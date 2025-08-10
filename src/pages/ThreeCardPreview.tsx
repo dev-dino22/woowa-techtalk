@@ -16,16 +16,13 @@ function ThreeCardPreview({ cardInfo, finished }: Props) {
   const groupRef = useRef<Group>(null);
   const animationTimeline = useRef<GSAPTimeline | null>(null);
 
-  // 이전 카드 정보 빈값 여부 상태 추적용 ref
   const prevCardNumbersEmpty = useRef(true);
   const prevExpirationEmpty = useRef(true);
   const prevBrandEmpty = useRef(true);
 
-  // 등장 애니메이션 (마운트 시)
   useEffect(() => {
     if (!groupRef.current) return;
 
-    // 초기 위치와 회전 세팅
     const group = groupRef.current;
     group.position.y = 100;
     group.rotation.y = 0;
@@ -76,7 +73,6 @@ function ThreeCardPreview({ cardInfo, finished }: Props) {
     }
   }, [finished]);
 
-  // 카드 정보 변경 시 플립 애니메이션 처리
   useEffect(() => {
     if (!groupRef.current) return;
 
