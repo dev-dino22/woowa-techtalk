@@ -4,6 +4,7 @@ import ThreeCardPreview from "../ThreeCardPreview";
 import { useState } from "react";
 import { OrbitControls } from "@react-three/drei";
 import Header from "../../shared/components/layouts/Header";
+import ProgressBar from "./ProgressBar";
 
 export type CardInfo = {
   cardNumbers: string;
@@ -29,9 +30,11 @@ export type AddCardContextType = {
   handleExpirationYearChange: (newExpirationYear: string) => void;
   handleBrandNameChange: (newBrandName: string) => void;
   handleCvcChange: (newCvc: string) => void;
+  handleProgressPlus: () => void;
 }
 
 function AddCardLayout() {
+    const [progress, setProgress] = useState(1);
     const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumbers: "",
     expiration: {
@@ -41,6 +44,10 @@ function AddCardLayout() {
     brandName: "",
     cvc: "",
     });
+
+    const handleProgressPlus = () => {
+        setProgress((prev) => prev + 1);
+    }
 
     const handleCardNumbersChange = (newCardNumbers: string) => {
     setCardInfo((prev) => ({ ...prev, cardNumbers: newCardNumbers }));
@@ -77,12 +84,13 @@ function AddCardLayout() {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Header />
+      <ProgressBar totalSteps={5} currentStep={progress} />
       <Canvas style={{ width: "50vw", height: 440 }} camera={{ position: [0, 0, 140], fov: 50 }}>
         <ThreeCardPreview cardInfo={cardInfo} />
         <OrbitControls />
       </Canvas>
       <div style={{ marginTop: 40, width: "100%", maxWidth: '640px' }}>
-        <Outlet context={{ cardInfo, cardNumber: cardInfo.cardNumbers, cardBrand: cardInfo.brandName, expiration: cardInfo.expiration, cvc: cardInfo.cvc, handleCardNumbersChange, handleExpirationMonthChange, handleExpirationYearChange, handleBrandNameChange, handleCvcChange }} />
+        <Outlet context={{ cardInfo, cardNumber: cardInfo.cardNumbers, cardBrand: cardInfo.brandName, expiration: cardInfo.expiration, cvc: cardInfo.cvc, handleCardNumbersChange, handleExpirationMonthChange, handleExpirationYearChange, handleBrandNameChange, handleCvcChange, handleProgressPlus }} />
       </div>
     </div>
   );

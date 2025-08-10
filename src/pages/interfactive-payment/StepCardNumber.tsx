@@ -9,9 +9,14 @@ import SlideUpText from "../../shared/components/animations/SlideUpText";
 import FadeIn from "../../shared/components/animations/FadeIn";
 
 function StepCardNumber() {
-    const { cardNumber, handleCardNumbersChange } = useOutletContext<AddCardContextType>();
+    const { cardNumber, handleCardNumbersChange, handleProgressPlus } = useOutletContext<AddCardContextType>();
     const navigate = useNavigate();
-    
+
+    const handleNext = () => {
+        navigate(generateRouterPath.interactivePaymentBrand());
+        handleProgressPlus();
+    }
+
     return (
         <S.Container>
             <SlideUpText>
@@ -28,7 +33,7 @@ function StepCardNumber() {
                 />
             </FadeIn>
             <S.Footer>
-                <Button onClick={() => navigate(generateRouterPath.interactivePaymentBrand())}>
+                <Button onClick={handleNext}>
                     다음
                 </Button>
             </S.Footer>

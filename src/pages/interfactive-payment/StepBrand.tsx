@@ -19,9 +19,12 @@ const CARD = {
 
 function StepBrand() {
   const navigate = useNavigate();
-  const { cardBrand, handleBrandNameChange } = useOutletContext<AddCardContextType>();
+  const { handleBrandNameChange, handleProgressPlus } = useOutletContext<AddCardContextType>();
 
-  const canNext = cardBrand !== "";
+  const handleNext = () => {
+      navigate(generateRouterPath.interactivePaymentExpiration());
+      handleProgressPlus();
+  }
 
   return (
     <S.Container>
@@ -38,7 +41,7 @@ function StepBrand() {
             />
         </FadeIn>
         <S.Footer>
-        <Button onClick={() => canNext && navigate(generateRouterPath.interactivePaymentExpiration())} disabled={!canNext}>
+        <Button onClick={handleNext}>
             다음
         </Button>
         </S.Footer>

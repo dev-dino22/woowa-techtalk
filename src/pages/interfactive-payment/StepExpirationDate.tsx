@@ -9,8 +9,12 @@ import type { AddCardContextType } from "./AddCardLayout";
 
 function StepExpirationDate() {
   const navigate = useNavigate();
-  const { expiration, handleExpirationMonthChange, handleExpirationYearChange } = useOutletContext<AddCardContextType>();
+  const { expiration, handleExpirationMonthChange, handleExpirationYearChange, handleProgressPlus } = useOutletContext<AddCardContextType>();
 
+  const handleNext = () => {
+      navigate(generateRouterPath.interactivePaymentCVC());
+      handleProgressPlus();
+  }
 
   return (
     <S.Container>
@@ -43,7 +47,7 @@ function StepExpirationDate() {
             </S.InputField>
         </FadeIn>
         <S.Footer>
-            <Button onClick={() => navigate((generateRouterPath.interactivePaymentCVC()))}>
+            <Button onClick={handleNext}>
                 다음
             </Button>
         </S.Footer>

@@ -9,8 +9,12 @@ import type { AddCardContextType } from "./AddCardLayout";
 
 export default function StepCvc() {
   const navigate = useNavigate();
-  const { handleCvcChange } = useOutletContext<AddCardContextType>();
+  const { handleCvcChange, handleProgressPlus } = useOutletContext<AddCardContextType>();
 
+  const handleFinish = () => {
+      navigate(generateRouterPath.interactivePaymentSuccess());
+      handleProgressPlus();
+  }
 
   return (
     <S.Container>
@@ -25,8 +29,8 @@ export default function StepCvc() {
             onChange={(e) => handleCvcChange(e.target.value)}
         />
         <S.Footer>
-            <Button onClick={() => navigate(generateRouterPath.interactivePaymentSuccess())}>
-                다음
+            <Button onClick={handleFinish}>
+                카드 등록 완료
             </Button>
         </S.Footer>
     </S.Container>
