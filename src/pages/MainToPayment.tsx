@@ -23,7 +23,7 @@ function MainToPayment() {
         </S.MessageContainer>
 
         <S.RegisterButton onClick={() => navigate(ROUTE_PATH.DEFAULT_PAYMENT)}>카드 등록하러 가기</S.RegisterButton>
-        <S.RegisterButton onClick={() => navigate(ROUTE_PATH.INTERACTIVE_PAYMENT)}>인터랙티브 카드 등록하러 가기</S.RegisterButton>
+        <S.RegisterButton onClick={() => navigate(ROUTE_PATH.INTERACTIVE_PAYMENT.BASE)}>인터랙티브 카드 등록하러 가기</S.RegisterButton>
       </S.Content>
     </S.Container>
   );

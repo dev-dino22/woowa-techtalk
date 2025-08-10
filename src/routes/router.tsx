@@ -1,12 +1,18 @@
 import { Global, ThemeProvider } from '@emotion/react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router';
-import InteractivePayment from '../pages/InteractivePayment';
+import DefaultPayment from '../pages/DefaultPayment';
+import AddCardLayout from '../pages/interfactive-payment/AddCardLayout';
+import StepBrand from '../pages/interfactive-payment/StepBrand';
+import StepCardNumber from '../pages/interfactive-payment/StepCardNumber';
+import StepExpirationDate from '../pages/interfactive-payment/StepExpirationDate';
+import StepSuccess from '../pages/interfactive-payment/StepSuccess';
+import MainToPayment from '../pages/MainToPayment';
 import Layout from '../shared/components/layouts/Layout';
 import { THEME } from '../shared/styles/global';
 import reset from '../shared/styles/reset';
 import { ROUTE_PATH } from './routePath';
-import MainToPayment from '../pages/MainToPayment';
-import DefaultPayment from '../pages/DefaultPayment';
+import StepCvc from '../pages/interfactive-payment/StepCvc';
+import StepPassword from '../pages/interfactive-payment/StepPassword';
 
 function Wrapper() {
   return (
@@ -26,8 +32,16 @@ const routes = createBrowserRouter([
     Component: Wrapper,
     children: [
       { path: ROUTE_PATH.HOME, Component: MainToPayment },
-      { path: ROUTE_PATH.INTERACTIVE_PAYMENT, Component: InteractivePayment },
+      // { path: ROUTE_PATH.INTERACTIVE_PAYMENT, Component: InteractivePayment },
       { path: ROUTE_PATH.DEFAULT_PAYMENT, Component: DefaultPayment },
+      { path: ROUTE_PATH.INTERACTIVE_PAYMENT.BASE, Component: AddCardLayout, children: [
+          { index: true, element: <StepCardNumber /> },
+          { path: ROUTE_PATH.INTERACTIVE_PAYMENT.BRAND, element: <StepBrand /> },
+          { path: ROUTE_PATH.INTERACTIVE_PAYMENT.EXPIRATION, element: <StepExpirationDate /> },
+          { path: ROUTE_PATH.INTERACTIVE_PAYMENT.CVC, element: <StepCvc /> },
+          { path: ROUTE_PATH.INTERACTIVE_PAYMENT.PASSWORD, element: <StepPassword /> },
+          { path: ROUTE_PATH.INTERACTIVE_PAYMENT.SUCCESS, element: <StepSuccess /> },
+        ] }
     ],
   },
 ]);

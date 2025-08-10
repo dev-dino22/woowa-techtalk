@@ -4,13 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import ImagePlane from "../shared/components/assets/three/ImagePlane";
 import CreditCardMesh from "./components/CreditCardMesh";
 import { CARD_BACKGROUND_COLOR, type TCardBrand } from "./InteractivePayment";
+import type { CardInfo } from "./interfactive-payment/AddCardLayout";
 
 type Props = {
-    cardInfo : {
-        cardNumbers: string[];
-        expirationDate: string[];
-        brandName: TCardBrand
-    }
+    cardInfo : CardInfo
 }
 
 function ThreeCardPreview({ cardInfo }: Props) {
