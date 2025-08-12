@@ -3,8 +3,8 @@ import { useNavigate, useOutletContext } from "react-router";
 import { generateRouterPath } from "../../routes/routePath";
 import Button from "../../shared/components/actions/Button";
 import FloatInput from "../../shared/components/actions/FloatInput";
-import SlideUpText from "../../shared/components/animations/SlideUpText";
 import { CARD_INFO, type AddCardContextType } from "./Main";
+import SlideIn from "../../shared/components/animations/SlideIn";
 
 export default function StepCvc() {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ export default function StepCvc() {
 
   return (
     <S.Container>
-        <SlideUpText>
+        <SlideIn>
             <S.Title>CVC 번호를 입력해 주세요</S.Title>
-        </SlideUpText>
+        </SlideIn>
         <FloatInput
             label="CVC"
             type="tel"

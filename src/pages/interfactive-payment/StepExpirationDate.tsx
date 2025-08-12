@@ -4,8 +4,8 @@ import { generateRouterPath } from "../../routes/routePath";
 import Button from "../../shared/components/actions/Button";
 import FloatInput from "../../shared/components/actions/FloatInput";
 import FadeIn from "../../shared/components/animations/FadeIn";
-import SlideUpText from "../../shared/components/animations/SlideUpText";
 import type { AddCardContextType } from "./Main";
+import SlideIn from "../../shared/components/animations/SlideIn";
 
 function StepExpirationDate() {
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ function StepExpirationDate() {
 
   return (
     <S.Container>
-        <SlideUpText>
+        <SlideIn>
                 <S.Title>카드 유효기간을 입력해 주세요</S.Title>
                 <S.Description>월/년도(MMYY)를 순서대로 입력해 주세요.</S.Description>
-        </SlideUpText>
+        </SlideIn>
         <FadeIn delay={0.5}>
             <S.InputField>
                 {["MONTH", "YEAR"].map((field, i) => {

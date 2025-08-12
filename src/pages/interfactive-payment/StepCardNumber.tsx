@@ -4,8 +4,8 @@ import { generateRouterPath } from "../../routes/routePath";
 import Button from "../../shared/components/actions/Button";
 import FloatInput from "../../shared/components/actions/FloatInput";
 import { CARD_INFO, type AddCardContextType } from "./Main";
-import SlideUpText from "../../shared/components/animations/SlideUpText";
 import FadeIn from "../../shared/components/animations/FadeIn";
+import SlideIn from "../../shared/components/animations/SlideIn";
 
 function formatCardNumber(input: string) {
   return input.replace(/\D/g, '')
@@ -32,10 +32,10 @@ function StepCardNumber() {
 
     return (
         <S.Container>
-            <SlideUpText>
+            <SlideIn>
                 <S.Title>결제할 카드 번호를 입력해주세요</S.Title>
                 <S.Description>본인 명의의 카드만 가능합니다.</S.Description>
-            </SlideUpText>
+            </SlideIn>
             <FadeIn delay={0.5}>
                 <FloatInput
                     label="카드 번호"

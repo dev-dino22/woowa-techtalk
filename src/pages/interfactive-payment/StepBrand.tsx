@@ -5,8 +5,8 @@ import SelectBox from "../../shared/components/actions/selectForm/SelectBox";
 import type { TCardBrand } from "./Main";
 import type { AddCardContextType } from "./Main";
 import styled from "@emotion/styled";
-import SlideUpText from "../../shared/components/animations/SlideUpText";
 import FadeIn from "../../shared/components/animations/FadeIn";
+import SlideIn from "../../shared/components/animations/SlideIn";
 
 const CARD = {
   BRAND: [
@@ -28,10 +28,10 @@ function StepBrand() {
 
   return (
     <S.Container>
-        <SlideUpText>
+        <SlideIn>
             <S.Title>카드사를 선택해주세요</S.Title>
             <S.Description>현재 국내 카드사만 가능합니다.</S.Description>
-        </SlideUpText>
+        </SlideIn>
         <FadeIn delay={0.5}>
             <SelectBox<TCardBrand>
                     onSelectHandler={(value) => handleBrandNameChange(value)}
