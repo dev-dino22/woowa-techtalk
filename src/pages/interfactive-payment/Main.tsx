@@ -6,18 +6,11 @@ import ThreeCardPreview from "../ThreeCardPreview";
 import ProgressBar from "./ProgressBar";
 import { useCardInfo } from "./hooks/useCardInfo";
 import { useProgressive } from "./hooks/useProgress";
+import type { CardBrandName, CardInfo } from "../../shared/types/card/cardTypes";
 
-export type CardInfo = {
-  cardNumbers: string;
-  expiration: {
-    month: string;
-    year: string;
-  };
-  brandName: string;
-  cvc: string;
-}
 
-export const CARD_BACKGROUND_COLOR = {
+
+export const CARD_BACKGROUND_COLOR: Record<CardBrandName, string> = {
   BC카드: "#F04651",
   신한카드: "#0046FF",
   카카오뱅크: "#FFE600",
@@ -26,6 +19,7 @@ export const CARD_BACKGROUND_COLOR = {
   롯데카드: "#ED1C24",
   하나카드: "#009490",
   국민카드: "#6A6056",
+  "": "#FFFFFF"
 } as const;
 
 export type TCardBrand = keyof typeof CARD_BACKGROUND_COLOR;
@@ -46,7 +40,7 @@ export const CARD_INFO = {
 export type AddCardContextType = {
   cardInfo: CardInfo;
   cardNumber: string;
-  cardBrand: string;
+  cardBrand: CardBrandName;
   expiration: {
     month: string;
     year: string;

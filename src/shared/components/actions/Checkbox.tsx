@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes } from 'react';
 
 interface CheckBoxProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   checked: boolean;

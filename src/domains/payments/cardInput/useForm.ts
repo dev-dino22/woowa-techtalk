@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export type ActivatedInputKey =
   | "cardNumberInput"

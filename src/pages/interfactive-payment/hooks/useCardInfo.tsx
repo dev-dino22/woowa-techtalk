@@ -1,14 +1,5 @@
 import { useState } from "react";
-
-export type CardInfo = {
-  cardNumbers: string;
-  expiration: {
-    month: string;
-    year: string;
-  };
-  brandName: string;
-  cvc: string;
-}
+import type { CardBrandName, CardInfo } from "../../../shared/types/card/cardTypes";
 
 export const useCardInfo = () => {
     const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -45,7 +36,7 @@ export const useCardInfo = () => {
         }));
         };
     
-        const handleBrandNameChange = (newBrandName: string) => {
+        const handleBrandNameChange = (newBrandName: CardBrandName) => {
         setCardInfo((prev) => ({ ...prev, brandName: newBrandName }));
         };
     

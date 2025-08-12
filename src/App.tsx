@@ -17,7 +17,6 @@ export default function App() {
         style={{ width: '50vw', height: '440px' }}
         camera={{ position: [0, 0, 140], fov: 50 }}>
         <ambientLight intensity={0.6} />
-        <RoundedRectMesh text={cardText} />
         <OrbitControls />
       </Canvas>
     </>

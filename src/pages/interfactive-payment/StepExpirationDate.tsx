@@ -24,7 +24,7 @@ function StepExpirationDate() {
         </SlideIn>
         <FadeIn delay={0.5}>
             <S.InputField>
-                {["MONTH", "YEAR"].map((field, i) => {
+                {["MONTH", "YEAR"].map((field) => {
                     const name = field.toLowerCase() as "month" | "year";
                     return (
                     <FloatInput
