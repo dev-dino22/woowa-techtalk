@@ -13,7 +13,7 @@ const directionMap: Record<Direction, { axis: "X" | "Y"; distance: number }> = {
 
 const getSlideKeyframes = (direction: Direction) => {
   const { axis, distance } = directionMap[direction];
-  return `
+  return keyframes`
     0% {
       opacity: 0;
       transform: translate${axis}(${distance}%);
