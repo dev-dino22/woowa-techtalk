@@ -62,7 +62,7 @@ function AddCardLayout() {
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
       <Header />
       <ProgressBar totalSteps={5} currentStep={progress} />
-      <Canvas style={{ width: "50vw", height: 400 }} camera={{ position: [0, 0, 140], fov: 50 }}>
+      <Canvas style={{ width: "50vw", height: 400 }} camera={{ position: [0, 0, 120], fov: 50 }}>
         <ThreeCardPreview cardInfo={cardInfo} finished={progress === 5} />
         <OrbitControls enableZoom={false} />
       </Canvas>

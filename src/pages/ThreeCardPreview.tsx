@@ -99,7 +99,7 @@ function ThreeCardPreview({ cardInfo, finished }: Props) {
   }, [cardInfo]);
 
   return (
-    <group ref={groupRef} rotation={[0, 0, Math.PI / 10]}>
+    <group ref={groupRef} rotation={[0, 0, Math.PI / 15]}>
       <CreditCardMesh cardColor={CARD_BACKGROUND_COLOR[cardInfo.brandName]} />
       <ImagePlane
         url={"/magnetic.png"}

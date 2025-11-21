@@ -36,7 +36,7 @@ function StepCardNumber() {
                 <S.Title>결제할 카드 번호를 입력해주세요</S.Title>
                 <S.Description>본인 명의의 카드만 가능합니다.</S.Description>
             </SlideIn>
-            <FadeIn delay={0.5}>
+            <FadeIn delay={1.5}>
                 <FloatInput
                     label="카드 번호"
                     type="tel"

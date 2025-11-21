@@ -13,7 +13,6 @@ const CARD = {
     "BC카드",
     "신한카드",
     "카카오뱅크",
-    "현대카드",
   ] as TCardBrand[],
 };
 
